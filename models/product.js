@@ -29,7 +29,7 @@ module.exports = class Product {
   save() {
     getProductsFromFile(products => {
       if(this.id) {
-        const existingProductIndex = product.findIndex(
+        const existingProductIndex = products.findIndex(
           prod => prod.id === this.id
         )
         const updatedProducts = [...products]
