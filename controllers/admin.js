@@ -13,7 +13,7 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  //if null (id) we can create a new product
+  //if null (id) we can create a new product (see models/product.js)
   const product = new Product(null,title, imageUrl, description, price);
   product.save();
   res.redirect('/')
@@ -38,9 +38,24 @@ exports.getEditProduct = (req, res, next) => {
   })
 }
 
-// exports.postEditProduct = (req, res, next) {
-
-// }
+ exports.postEditProduct = (req, res, next) => {
+   // fetch information for the product
+   const prodId = req.body.productId
+   const updatedTitle = req.body.title
+   const updatedImageUrl = req.body.imageUrl
+   const UpdatedPrice = req.body.price
+   const updatedDesc = req.body.description
+   //call save() to update
+   const updatedProduct = new Product(
+     prodId,
+     updatedTitle,
+     updatedImageUrl,
+     UpdatedPrice,
+     updatedDesc
+    )
+    updatedProduct.save()
+    res.redirect('/admin/products')
+ }
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll(products => {

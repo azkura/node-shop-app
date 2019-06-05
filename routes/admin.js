@@ -18,6 +18,6 @@ router.post('/add-product', adminController.postAddProduct)
 router.get('/edit-product/:productId', adminController.getEditProduct)
 
 //not need to receive any dynamic segment....post request(data can be enclosed in the request)
-router.post('/edit-product')
+router.post('/edit-product',adminController.postEditProduct)
 
 module.exports = router
