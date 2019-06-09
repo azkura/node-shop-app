@@ -8,6 +8,8 @@ const errorController = require('./controllers/error');
 const sequelize = require('./helpers/database')
 const Product = require('./models/product')
 const User = require('./models/user')
+const Cart = require('./models/cart')
+const CartItem = require('./models/cart-item')
 
 const app = express();
 
@@ -43,9 +45,16 @@ app.use(errorController.get404);
 //make a RELATIONSHIP (associations user-product) CONTRAINTS = MANAGE ONDELETE = DELETE
 Product.belongsTo(User, { contraints: true, onDelete: 'CASCADE' })
 User.hasMany(Product)
+User.hasOne(Cart)
+Cart.belongsTo(User)
+// through: were this connection should be started
+Cart.belongsToMany(Product, { through: CartItem })
+Product.belongsToMany(Cart, { through: CartItem })
 
-// sequelize.sync({ forced: true })
-sequelize.sync()
+
+sequelize
+.sync({ forced: true })
+//.sync()
 .then(res => {
     return User.findByPk(1)
     //console.log(res)

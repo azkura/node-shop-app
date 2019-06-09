@@ -2,10 +2,10 @@ const Sequelize = require('sequelize')
 
 const sequelize = require('../helpers/database')
 
-const CartItem = sequelize.define('CartItem', {
+const CartItem = sequelize.define('cartItem', {
   id: {
-    type: Sequelize.STRING,
-    autoIcrement: true,
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
