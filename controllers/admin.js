@@ -10,16 +10,17 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
-  const imageUrl = req.body.imageUrl;
+  const imageUrl = req.body.imageUrl
   const price = req.body.price;
-  const description = req.body.description;
-  Product.create({
+  const description = req.body.description
+  //sequelize method/association
+  req.user.createProduct({
     title: title,
     price: price,
     imageUrl: imageUrl,
-    description: description
+    description: description,
   })
-  .then(res => {
+  .then(result => {
     console.log('CREATED PRODUCT!')
     res.redirect('/admin/products')
   })
