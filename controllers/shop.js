@@ -84,15 +84,12 @@ exports.getCart = (req, res, next) => {
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId
   let fetchedCart
-  req.user
-  .getCart()
-  .then(cart => {
+  req.user.getCart().then(cart => { 
     fetchedCart = cart
     //check if product already in cart
     return cart.getProducts({ where: { id: prodId } })
-  })
-   // increase quantity
-   .then(products => {
+    // increase quantity  
+  }).then(products => {
      let product
      if(products.length > 0) {
         product = products[0]
@@ -108,8 +105,7 @@ exports.postCart = (req, res, next) => {
         })
       })
       .catch(err => console.log(err))
-   })
-   .then(() => {
+   }).then(() => {
      res.redirect('/cart')
    })
   .catch(err => console.log(err))
@@ -122,10 +118,10 @@ exports.postCart = (req, res, next) => {
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
   Product.findById(prodId, product => {
-    Cart.deleteProduct(prodId, product.price);
-    res.redirect('/cart');
-  });
-};
+    Cart.deleteProduct(prodId, product.price)
+    res.redirect('/cart')
+  })
+}
 
 exports.getOrders = (req, res, next) => {
   res.render('shop/orders', {
