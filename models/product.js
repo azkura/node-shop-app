@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
 
-const sequelize = require('../helpers/database')
+const sequelize = require('../helpers/database');
 
 const Product = sequelize.define('product', {
   id: {
@@ -12,7 +12,7 @@ const Product = sequelize.define('product', {
   title: Sequelize.STRING,
   price: {
     type: Sequelize.DOUBLE,
-    allowNull: true
+    allowNull: false
   },
   imageUrl: {
     type: Sequelize.STRING,
@@ -22,9 +22,9 @@ const Product = sequelize.define('product', {
     type: Sequelize.STRING,
     allowNull: false
   }
-})
+});
 
-module.exports = Product
+module.exports = Product;
 
 
 
